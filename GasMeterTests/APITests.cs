@@ -1,15 +1,15 @@
-using System;
+using FluentAssertions;
 using Xunit;
 
-namespace GasMeterTests
+namespace GasMeter.Tests
 {
     public class APITests
     {
         [Fact]
         public void Test1()
         {
-            Assert.True(true);
-
+            var result = 2;
+            result.Should().Be(2);
         }
 
         [Fact]

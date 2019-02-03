@@ -8,7 +8,7 @@ namespace GasMeter.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MeasurementController : ControllerBase
+    public class MeasureController : ControllerBase
     {
         // GET api/values
         [HttpGet]
