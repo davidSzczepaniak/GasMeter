@@ -10,4 +10,10 @@
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GasMeter.Data\GasMeter.Data.csproj" />
+    <ProjectReference Include="..\GasMeter.Interfaces\GasMeter.Interfaces.csproj" />
+    <ProjectReference Include="..\GasMeter.Repositories\GasMeter.Repositories.csproj" />
+  </ItemGroup>
+
 </Project>
