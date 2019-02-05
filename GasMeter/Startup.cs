@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using GasMeter.Data;
+using GasMeter.DataModels;
 using GasMeter.Interfaces.Repositories;
 using GasMeter.Repositories;
+using GasMeter.ViewModels;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -35,6 +38,14 @@ namespace GasMeter
 
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<IMeasureRepository, MeasureRepository>();
+
+            Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<Measure, MeasureViewModel>();
+                cfg.CreateMap<MeasureViewModel, Measure>();
+                cfg.CreateMap<CapturedImage, CapturedImageViewModel>();
+                cfg.CreateMap<CapturedImageViewModel, CapturedImage>();
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

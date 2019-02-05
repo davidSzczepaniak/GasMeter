@@ -55,5 +55,10 @@ namespace GasMeter.Repositories
             context.Entry(entity).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             Save();
         }
+
+        public bool HasAny(Func<T, bool> predicate)
+        {
+            return context.Set<T>().Any<T>(predicate);
+        }
     }
 }

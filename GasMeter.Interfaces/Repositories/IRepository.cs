@@ -18,6 +18,8 @@ namespace GasMeter.Interfaces.Repositories
 
         void Delete(T entity);
 
+        bool HasAny(Func<T, bool> predicate);
+
         int Count(Func<T, bool> predicate);
     }
 }

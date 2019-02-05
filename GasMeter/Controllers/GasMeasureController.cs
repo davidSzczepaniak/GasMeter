@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using GasMeter.DataModels;
 using GasMeter.Interfaces.Repositories;
+using GasMeter.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GasMeter.Controllers
@@ -18,40 +20,63 @@ namespace GasMeter.Controllers
         public GasMeasureController(IMeasureRepository measureRepository)
             => this.measureRepository = measureRepository;
 
-        // GET api/values
+        // GET api/gasmeasure
         [HttpGet]
-        public ActionResult<IEnumerable<Measure>> Get()
+        public ActionResult<IEnumerable<MeasureViewModel>> Get()
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
             return Ok(measureRepository.GetAll());
         }
 
-        // GET api/values/5
+        // GET api/gasmeasure/e37a4f8a-c046-4c83-a455-08d68bae5a28
         [HttpGet("{id:guid}")]
-        public ActionResult<Measure> Get(Guid id)
+        public ActionResult<MeasureViewModel> Get(Guid id)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            if (!measureRepository.HasAny(m => m.Id == id))
+                NoContent();
+
             return Ok(measureRepository.GetById(id));
         }
 
-        // POST api/values
+        // POST api/gasmeasure
         [HttpPost]
-        public void Post([FromBody] Measure value)
+        public ActionResult Post([FromBody] MeasureViewModel value)
         {
-            measureRepository.Create(value);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            Measure measure = Mapper.Map<Measure>(value);
+            measureRepository.Create(measure);
+            return Ok(measure.Id);
         }
 
-        // PUT api/values/5
+        // PUT api/gasmeasure/e37a4f8a-c046-4c83-a455-08d68bae5a28
         [HttpPut("{id:guid}")]
-        public void Put(Guid id, [FromBody] Measure value)
+        public ActionResult Put(Guid id, [FromBody] MeasureViewModel value)
         {
-            measureRepository.Update(value);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            if (!measureRepository.HasAny(m => m.Id == id))
+                NoContent();
+            var dbMeasure = measureRepository.GetById(id);
+            Mapper.Map<MeasureViewModel, Measure>(value, dbMeasure);
+            measureRepository.Update(dbMeasure);
+            return Ok();
         }
 
-        // DELETE api/values/5
+        // DELETE api/gasmeasure/e37a4f8a-c046-4c83-a455-08d68bae5a28
         [HttpDelete("{id:guid}")]
-        public void Delete(Guid id)
+        public ActionResult Delete(Guid id)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            if (!measureRepository.HasAny(m => m.Id == id))
+                NoContent();
             var itemToDelete = measureRepository.GetById(id);
             measureRepository.Delete(itemToDelete);
+            return Ok();
         }
     }
 }
