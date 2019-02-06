@@ -43,18 +43,18 @@ namespace GasMeter.Controllers
 
         // POST api/gasmeasure
         [HttpPost]
-        public ActionResult Post([FromBody] MeasureViewModel value)
+        public IActionResult Post([FromBody] MeasureViewModel value)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
             Measure measure = Mapper.Map<Measure>(value);
             measureRepository.Create(measure);
-            return Ok(measure.Id);
+            return CreatedAtAction("Get", new { Id = measure.Id});
         }
 
         // PUT api/gasmeasure/e37a4f8a-c046-4c83-a455-08d68bae5a28
         [HttpPut("{id:guid}")]
-        public ActionResult Put(Guid id, [FromBody] MeasureViewModel value)
+        public IActionResult Put(Guid id, [FromBody] MeasureViewModel value)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -68,7 +68,7 @@ namespace GasMeter.Controllers
 
         // DELETE api/gasmeasure/e37a4f8a-c046-4c83-a455-08d68bae5a28
         [HttpDelete("{id:guid}")]
-        public ActionResult Delete(Guid id)
+        public IActionResult Delete(Guid id)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);

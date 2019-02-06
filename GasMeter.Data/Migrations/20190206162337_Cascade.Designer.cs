@@ -4,14 +4,16 @@ using GasMeter.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GasMeter.Data.Migrations
 {
     [DbContext(typeof(GasMeterDbContext))]
-    partial class GasMeterDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190206162337_Cascade")]
+    partial class Cascade
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,7 +23,8 @@ namespace GasMeter.Data.Migrations
 
             modelBuilder.Entity("GasMeter.DataModels.CapturedImage", b =>
                 {
-                    b.Property<Guid>("Id");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<byte[]>("Data");
 
@@ -32,8 +35,7 @@ namespace GasMeter.Data.Migrations
 
             modelBuilder.Entity("GasMeter.DataModels.Measure", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<Guid>("Id");
 
                     b.Property<DateTime>("DateCreated");
 
@@ -44,11 +46,11 @@ namespace GasMeter.Data.Migrations
                     b.ToTable("Measures");
                 });
 
-            modelBuilder.Entity("GasMeter.DataModels.CapturedImage", b =>
+            modelBuilder.Entity("GasMeter.DataModels.Measure", b =>
                 {
-                    b.HasOne("GasMeter.DataModels.Measure")
-                        .WithOne("Image")
-                        .HasForeignKey("GasMeter.DataModels.CapturedImage", "Id")
+                    b.HasOne("GasMeter.DataModels.CapturedImage", "Image")
+                        .WithOne()
+                        .HasForeignKey("GasMeter.DataModels.Measure", "Id")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

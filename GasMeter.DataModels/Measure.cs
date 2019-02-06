@@ -14,6 +14,8 @@ namespace GasMeter.DataModels
         [Required]
         public double Measurement { get; set; }
 
+        [Required]
         public CapturedImage Image { get; set; }
+
     }
 }

@@ -29,7 +29,7 @@ namespace GasMeter.Repositories
             Save();
         }
 
-        public void Delete(T entity)
+        public virtual void Delete(T entity)
         {
             context.Set<T>().Remove(entity);
             Save();
