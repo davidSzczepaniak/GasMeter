@@ -10,12 +10,6 @@ namespace GasMeter.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
-            modelBuilder.Entity<Measure>().HasOne(item => item.Image)
-                       .WithOne()
-                       .HasForeignKey<CapturedImage>(item => item.Id)
-                       .IsRequired(true)
-                       .OnDelete(DeleteBehavior.Cascade);
         }
 
         public DbSet<Measure> Measures { get; set; }

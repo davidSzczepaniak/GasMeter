@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 
 namespace GasMeter.ViewModels
 {
-    public class MeasureViewModel
+    public class MeasureDTO
     {
         public DateTime DateCreated { get; set; }
 
         public double Measurement { get; set; }
 
-        public CapturedImageViewModel Image { get; set; }
+        public CapturedImageDTO Image { get; set; }
     }
 }

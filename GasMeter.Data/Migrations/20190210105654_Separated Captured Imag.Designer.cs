@@ -4,14 +4,16 @@ using GasMeter.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GasMeter.Data.Migrations
 {
     [DbContext(typeof(GasMeterDbContext))]
-    partial class GasMeterDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190210105654_Separated Captured Imag")]
+    partial class SeparatedCapturedImag
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,8 +23,7 @@ namespace GasMeter.Data.Migrations
 
             modelBuilder.Entity("GasMeter.DataModels.CapturedImage", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<Guid>("Id");
 
                     b.Property<byte[]>("Data");
 
@@ -40,22 +41,18 @@ namespace GasMeter.Data.Migrations
 
                     b.Property<DateTime>("DateCreated");
 
-                    b.Property<Guid>("ImageId");
-
                     b.Property<double>("Measurement");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ImageId");
-
                     b.ToTable("Measures");
                 });
 
-            modelBuilder.Entity("GasMeter.DataModels.Measure", b =>
+            modelBuilder.Entity("GasMeter.DataModels.CapturedImage", b =>
                 {
-                    b.HasOne("GasMeter.DataModels.CapturedImage", "Image")
-                        .WithMany()
-                        .HasForeignKey("ImageId")
+                    b.HasOne("GasMeter.DataModels.Measure")
+                        .WithOne("Image")
+                        .HasForeignKey("GasMeter.DataModels.CapturedImage", "Id")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

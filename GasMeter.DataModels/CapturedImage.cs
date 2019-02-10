@@ -9,6 +9,8 @@ namespace GasMeter.DataModels
         [Key]
         public Guid Id { get; set; }
 
+        public DateTime DateTaken { get; set; }
+
         public byte[] Data { get; set; }
     }
 }

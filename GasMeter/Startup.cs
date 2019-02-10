@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using GasMeter.Data;
 using GasMeter.DataModels;
+using GasMeter.ImageHandling;
 using GasMeter.Interfaces.Repositories;
 using GasMeter.Repositories;
 using GasMeter.ViewModels;
@@ -36,15 +37,29 @@ namespace GasMeter
 
             services.AddDbContext<GasMeterDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-            services.AddScoped<IMeasureRepository, MeasureRepository>();
+            ResolveInterfaces(services);
 
+            InitializeAutomapper();
+        }
+
+        private static void ResolveInterfaces(IServiceCollection services)
+        {
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped(typeof(ICapturedImageRepository), typeof(CapturedImageRepository));
+            services.AddScoped<IMeasureRepository, MeasureRepository>();
+            services.AddTransient<IImageHandler, ImageHandler>();
+            services.AddTransient<IImageWriter, ImageWriter>();
+
+        }
+
+        private static void InitializeAutomapper()
+        {
             Mapper.Initialize(cfg =>
             {
-                cfg.CreateMap<Measure, MeasureViewModel>();
-                cfg.CreateMap<MeasureViewModel, Measure>();
-                cfg.CreateMap<CapturedImage, CapturedImageViewModel>();
-                cfg.CreateMap<CapturedImageViewModel, CapturedImage>();
+                cfg.CreateMap<Measure, MeasureDTO>();
+                cfg.CreateMap<MeasureDTO, Measure>();
+                cfg.CreateMap<CapturedImage, CapturedImageDTO>();
+                cfg.CreateMap<CapturedImageDTO, CapturedImage>();
             });
         }
 

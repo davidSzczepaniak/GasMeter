@@ -9,11 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GasMeter.Tests", "GasMeterT
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GasMeter.DataModels", "GasMeter.DataModels\GasMeter.DataModels.csproj", "{44B506A4-49A9-4BFD-A782-127EEF15211C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GasMeter.Interfaces", "GasMeter.Interfaces\GasMeter.Interfaces.csproj", "{A17702C2-F85D-4C48-85A5-BC564240C9A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GasMeter.Interfaces", "GasMeter.Interfaces\GasMeter.Interfaces.csproj", "{A17702C2-F85D-4C48-85A5-BC564240C9A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GasMeter.Repositories", "GasMeter.Repositories\GasMeter.Repositories.csproj", "{0B396163-157E-41A6-A87A-174B20B28D92}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GasMeter.Repositories", "GasMeter.Repositories\GasMeter.Repositories.csproj", "{0B396163-157E-41A6-A87A-174B20B28D92}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GasMeter.Data", "GasMeter.Data\GasMeter.Data.csproj", "{F377E36D-DBE7-4882-8F59-3C90ED7FDA85}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GasMeter.Data", "GasMeter.Data\GasMeter.Data.csproj", "{F377E36D-DBE7-4882-8F59-3C90ED7FDA85}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GasMeter.ImageHandling", "GasMeter.ImageHandling\GasMeter.ImageHandling.csproj", "{E4821B32-C352-4119-B8CE-ACE3A0E250A7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{F377E36D-DBE7-4882-8F59-3C90ED7FDA85}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F377E36D-DBE7-4882-8F59-3C90ED7FDA85}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F377E36D-DBE7-4882-8F59-3C90ED7FDA85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4821B32-C352-4119-B8CE-ACE3A0E250A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4821B32-C352-4119-B8CE-ACE3A0E250A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4821B32-C352-4119-B8CE-ACE3A0E250A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4821B32-C352-4119-B8CE-ACE3A0E250A7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
